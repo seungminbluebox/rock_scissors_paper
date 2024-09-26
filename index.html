@@ -9,7 +9,7 @@
                 background-color: skyblue;
                 margin: 0;
             }
-            .whole{
+            .whole{                                 /*전체를 가운데정렬 해준다.*/
                 position: absolute;
                 left: 50%;
                 top: 50%;
@@ -41,7 +41,7 @@
                 
                 width: 50px;
                 height: 50px;
-                position: relative;
+                position: relative;                             /*박스안에서 위치를 잡아야하기때문에 ABSOLUTE가 아닌 RELATIVE로*/
                 top: -50px;
             }
             .match{
@@ -50,11 +50,11 @@
                 border-radius: 50px;
             }
             .pointer h2{
-                margin: 0px 65px;
+                margin: 0px 65px;                               /*POINTER 클래스안에 있는 H2태그 두개를 간격벌리기*/
             }
         </style>
         <script>
-            function random(){
+            function random(){                                              //가위바위보 세개중 하나를 무작위로 고르는 함수
                 var botlist=['rock','paper','scissors']
                 var random=Math.floor(Math.random()*3)
                 return botlist[random]
@@ -63,26 +63,30 @@
             var losecount=0
             var match_count=0
 
-            function play(user_choice){
+            function play(user_choice){                                         //사용자와 봇의 패를 비교하여 승부를 내는 함수
                 var bot_choice=random()
                 var res=''
-                if (user_choice===bot_choice){
+                if (user_choice===bot_choice){                                  /*서로 낸게 같을때*/
                     res='비김'
                     match_count++
                 }
                 else{
-                    if((user_choice==='rock' && bot_choice==='scissors') || (user_choice==='scissors' && bot_choice==='paper') ||(user_choice==='paper' && bot_choice==='rock')){
-                        res='승리!'
+                    if((user_choice==='rock' && bot_choice==='scissors') ||
+                     (user_choice==='scissors' && bot_choice==='paper') ||
+                     (user_choice==='paper' && bot_choice==='rock')){
+                        res='승리!'                                 //사용자가 이긴경우
                         win_count++
                         match_count++
                     }
                     else{
-                        res='패배!'
+                        res='패배!'                                 //사용자가 진경우
                         losecount++
                         match_count++
                     }
                 }
-                document.querySelector('.match').innerHTML=`<img src="${user_choice}.png"><img id='vs' src="vs.png"><img src="${bot_choice}.png"><br><div class='pointer'><h2>사용자</h2><h2>컴퓨터</h2></div><h1>결과: ${res}</h1>`
+                document.querySelector('.match').innerHTML=`<img src="${user_choice}.png">
+                <img id='vs' src="vs.png"><img src="${bot_choice}.png"><br><div class='pointer'>
+                <h2>사용자</h2><h2>컴퓨터</h2></div><h1>결과: ${res}</h1>`
                 document.querySelector('.matchcount').textContent=match_count
                 document.querySelector('.wincount').textContent=win_count
                 document.querySelector('.losecount').textContent=losecount
@@ -96,14 +100,14 @@
             function paper(){
                 play('paper')
             }
-            function reset(){
+            function reset(){                                               //승부전적을 초기화해주는 함수
                 document.querySelector('.match').innerHTML=''
                 document.querySelector('.matchcount').textContent=0
                 document.querySelector('.wincount').textContent=0
                 document.querySelector('.losecount').textContent=0
-                win_count=0
-                losecount=0
-                match_count=0
+                win_count=0                                                 /*위 친구들을 건든다고 같이 0으로*/
+                losecount=0                                                 /*변하는게 아니니깐 얘네들도*/
+                match_count=0                                               /*0으로 값을 초기화*/
             }
         </script>
     </head>
